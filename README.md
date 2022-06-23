@@ -2,7 +2,7 @@
 
 ---
 
-### 目录
+### Catalogue
 1. [Environment](#Environment)
 2. [Explain](#Explain)
 3. [How2train](#How2train)
@@ -13,10 +13,10 @@ Python 3.6
 
 tensorflow-gpu 1.15.0
 
-### 文件说明
-config.py 此文件包含默认配置。对其进行子类化并修改您需要更改的属性。
+### Explain
+config.py This file contains the default configuration,allows you to subclass it and modify the properties you need to change.
 
-dataset.py 此文件提供了一种处理任何数据集的一致方式。它允许您使用新的数据集进行训练，而无需更改模型的代码。它还支持同时加载多个数据集，如果您要检测的对象并非都在一个数据集中可用，这将非常有用。
+dataset.py This file provides a consistent way to process any data set.It allows you to train with new datasets without changing the code of the model.It also supports loading multiple datasets at the same time, which is very useful if the objects you want to detect are not all available in one dataset.
 
 PNA.py 为了支持每批训练多个图像，我们将所有图像调整为![img](file:///C:/Users/DMIS-ldd/AppData/Local/Temp/msohtmlclip1/01/clip_image002.gif)大小。
 
