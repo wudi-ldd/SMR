@@ -18,45 +18,43 @@ config.py This file contains the default configuration,allows you to subclass it
 
 dataset.py This file provides a consistent way to process any data set.It allows you to train with new datasets without changing the code of the model.It also supports loading multiple datasets at the same time, which is very useful if the objects you want to detect are not all available in one dataset.
 
-PNA.py 为了支持每批训练多个图像，我们将所有图像调整为![img](file:///C:/Users/DMIS-ldd/AppData/Local/Temp/msohtmlclip1/01/clip_image002.gif)大小。
+PNA.py To support multiple images for each batch of training, we adjusted all images to 512*512.
 
-NLMWGC.py 使用非局部均值滤波去除原始图像噪声。
+NLMWGC.py Removing original image noise using nonlocal mean filtering.
 
-augment.py 实现训练图像带标签的增广，主要包括旋转、噪声、椒盐、亮度调整等操作。
+augment.py The training image is augmented with labels, mainly including rotation, noise, salt and pepper, brightness adjustment and other operations.
 
-labelme2COCO.py 将json文件转换为COCO格式的训练图像
+labelme2COCO.py Convert JSON file to coco format training image.
 
-train.py 运行train.py进行训练
+train.py Run train.py for training.
 
-predict.py 训练完成后运行predict进行预测
+predict.py Run predict.py to predict after training
 
-### 训练步骤
-#### 1、准备数据集
-a、利用labelme标注数据集，注意标注的时候同一个类要用不同的序号，比如画面中存在**两个苹果那么一个苹果的label就是apple1另一个是apple2。**    
-b、标注完成后将jpg文件和json文件放在根目录下的before里面。  
-c、之后运行json_to_dataset.py就可以生成train_dataset文件夹了。  
+### How2train
+#### 1、Prepare dataset
+a、Label the dataset with labelme. Note that the same class should use different serial numbers when labeling,For example, there are **two quartz in the picture. One is quartz1 and the other is quartz2.**    
+b、After annotation, put the JPG file and JSON file in before under the root directory.  
+c、Then run JSON_ to_ dataset. Py to generate a train_ Dataset folder.
 
-#### 2、修改训练参数
-a、dataset.py内修改自己要分的类，分别是load_shapes函数和load_mask函数内和类有关的内容，即将原有的circle、square等修改成自己要分的类。    
-b、在train文件夹下面修改ShapesConfig(Config)的内容，NUM_CLASS等于自己要分的类的数量+1。  
-c、IMAGE_MAX_DIM、IMAGE_MIN_DIM、BATCH_SIZE和IMAGES_PER_GPU根据自己的显存情况修改。RPN_ANCHOR_SCALES根据IMAGE_MAX_DIM和IMAGE_MIN_DIM进行修改。  
-d、STEPS_PER_EPOCH代表每个世代训练多少次。   
+#### 2、Modify training parameters
+a、dataset.py Modify the classes you want to classify, which are load_ Shapes function and load_ The contents related to classes in the mask function, that is, the original circle, square, etc. are modified into their own classes.   
+b、Modify the contents of shapesconfig (config) under the train folder, num_ Class is equal to the number of classes you want to divide +1.  
+c、IMAGE_MAX_DIM、IMAGE_MIN_DIM、BATCH_SIZE和IMAGES_PER_GPU modify according to your own video memory。RPN_ ANCHOR_ Scales according to image_ MAX_ Dim and image_ MIN_ Dim.  
+d、STEPS_ PER_ Epoch represents how many times each generation trains.  
 
-#### 3、训练
+#### 3、Train
 
-运行train.py进行训练
+Run train.py for training
 
-#### 4、预测
-训练完成后运行predict.py进行预测  
+#### 4、predict
+Run predict.py for prediction
 
-### 识别结果
-
+### Identification results
 ![1655291063095](C:\Users\DMIS-ldd\AppData\Roaming\Typora\typora-user-images\1655291063095.png)
 
-​                                                                                            原图
+​                                                                                            Original drawing
 
 ![1655291091552](C:\Users\DMIS-ldd\AppData\Roaming\Typora\typora-user-images\1655291091552.png)
 
-​                                                                                        识别结果
-
-  为方便观察，我们修改了visualize.py的检测方式，去除识别框，修改识别标签字体的大小，并使其居中。
+​                                                                                       Identification results
+For convenience of observation, we modified visualize.py, remove the identification box, modify the font size of the identification label, and center it.
